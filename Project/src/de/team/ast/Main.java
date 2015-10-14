@@ -1,6 +1,9 @@
 package de.team.ast;
 
-public class Main {public Main() {
-	// TODO Auto-generated constructor stub
-}
+public class Main {
+
+	public static void main(String[] args){
+		ADTListe meineListe = ADTListe.create();
+		System.out.println(meineListe.laenge());
+	}
 }
