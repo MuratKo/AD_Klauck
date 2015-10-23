@@ -1,6 +1,6 @@
 package adtarray;
 
-import adtliste.ADTListe;
+import adtliste.ADTList;
 
 public class ADTArray {
 
@@ -8,15 +8,15 @@ public class ADTArray {
 	
 	private int oldArraySize = ARRAY_SIZE;
 	
-	ADTListe list;
+	ADTList list;
 	private int length;
 	
 	private ADTArray(){
-		list = ADTListe.create();
+		list = ADTList.create();
 		length = -1;
 		
-		for(int i = 1; i <= ARRAY_SIZE; i++){
-			list.insert(i, 0);
+		for(int i = 0; i <= ARRAY_SIZE; i++){
+			list.insert(0, i);
 		}
 	}
 	
@@ -24,25 +24,54 @@ public class ADTArray {
 		return new ADTArray();
 	}
 	
-	public void setA(int pos, int elem){
-		arrayReachedLimit(pos);
-		list.delete(pos+1);
-		list.insert(pos+1, elem);
+	//Setzt ein Element an gegebener Position in das Array
+	public ADTArray setA(int pos, int elem){
+		ADTList copyOfList = list;
+		arrayReachedLimit(copyOfList, pos);
+		list = list.delete(pos+1);
+		list = list.insert(elem, pos+1);
+		//Länger nur erhöhen, wenn pos größer ist als die Länge des Arrays
 		if(length < pos){
 			length = pos;
 		}
+		return this;
 	}
 	
-	private void arrayReachedLimit(int pos) {
-		pos++;
-		if(pos > oldArraySize -10 ){
-			int newArraySize = oldArraySize + ARRAY_SIZE + pos;
-			for(int i = list.laenge()+1; i <= newArraySize; i++){
-				list.insert(i, 0);
+		//Array vergrößern
+		private void arrayReachedLimit(ADTList copyOfList, int pos) {
+			int nextElemPos = pos++;
+			if(nextElemPos > oldArraySize -10 ){
+				int newArraySize = oldArraySize + ARRAY_SIZE + nextElemPos;
+				for(int i = list.laenge()+1; i <= newArraySize; i++){
+					list = list.insert(0, i);
+				}
+				oldArraySize = newArraySize;
 			}
-			oldArraySize = newArraySize;
 		}
-	}
+
+	public int getOldArraySize() {
+			return oldArraySize;
+		}
+
+		public void setOldArraySize(int oldArraySize) {
+			this.oldArraySize = oldArraySize;
+		}
+
+		public ADTList getList() {
+			return list;
+		}
+
+		public void setList(ADTList list) {
+			this.list = list;
+		}
+
+		public int getLength() {
+			return length;
+		}
+
+		public void setLength(int length) {
+			this.length = length;
+		}
 
 	public int getA(int pos){
 		

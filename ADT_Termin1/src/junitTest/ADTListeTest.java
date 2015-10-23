@@ -5,17 +5,17 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import adtliste.ADTListe;
+import adtliste.ADTList;
 
 public class ADTListeTest {
 
-	ADTListe list;
-	ADTListe list2;
+	ADTList list;
+	ADTList list2;
 	
 	@Before
 	public void setUp() throws Exception {
-		list = ADTListe.create();
-		list2 = ADTListe.create();
+		list = ADTList.create();
+		list2 = ADTList.create();
 	}
 
 	@Test
