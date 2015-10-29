@@ -251,4 +251,19 @@ public class ADTList {
 	private void setList(int[] list) {
 		this.list = list;
 	}
+	
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if(o instanceof ADTList){
+        	for(int i = 1; i <= this.length; i++){
+        		//sobald ein Element nicht uebereinstimmt, return false
+        		if(!(((ADTList) o).retrieve(i) == this.retrieve(i))) return false;
+        	}
+        }else{
+        	return false;
+        }
+        	
+        return true;
+    }
 }

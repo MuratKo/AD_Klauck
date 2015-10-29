@@ -1,6 +1,7 @@
 package adtstack;
 
 import adtliste.ADTList;
+import adtqueue.ADTQueue;
 
 public class ADTStack {
 	
@@ -68,5 +69,32 @@ public class ADTStack {
 	public boolean isEmptyS(){
 		return internalViewOfStack.isEmpty();
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+		
+        if (o == this) return true;
+        
+        if(o instanceof ADTStack){
+        	ADTStack s1 = ADTStack.createS();
+    		s1.setInternalViewOfStack(this.getInternalViewOfStack());
+    		
+    		ADTStack s2 = ADTStack.createS();
+    		s2.setInternalViewOfStack(((ADTStack) o).getInternalViewOfStack());
+    		
+    		
+        	while(!s1.isEmptyS()){
+        		if(!(s1.top() == s2.top())) return false;
+        		s1 = s1.pop();
+        		s2 = s2.pop();
+        	}
+        	if(!s2.isEmptyS()) return false;
+        	
+        }else{
+        	return false;
+        }
+        	
+        return true;
+    }
 
 }

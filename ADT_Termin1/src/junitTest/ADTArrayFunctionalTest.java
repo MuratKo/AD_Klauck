@@ -20,7 +20,7 @@ public class ADTArrayFunctionalTest {
 	
 	@Test
 	public void initATest() {
-		assertEquals(-1, array.lengthA());
+		assertEquals(0, array.lengthA());
 	}
 	
 	@Test
@@ -29,7 +29,7 @@ public class ADTArrayFunctionalTest {
 		assertEquals(1, array.getA(0));
 		
 		array = ADTArray.initA();
-		assertEquals(-1, array.lengthA());
+		assertEquals(0, array.lengthA());
 		
 		array = array.setA(5, 1);
 		assertEquals(0, array.getA(0));
@@ -40,7 +40,7 @@ public class ADTArrayFunctionalTest {
 		assertEquals(1, array.getA(5));
 		
 		array = ADTArray.initA();
-		assertEquals(-1, array.lengthA());
+		assertEquals(0, array.lengthA());
 		
 		array = array.setA(0, 1);
 		array = array.setA(1, 2);
@@ -57,7 +57,7 @@ public class ADTArrayFunctionalTest {
 		assertEquals(3, array.getA(2));
 		
 		array = ADTArray.initA();
-		assertEquals(-1, array.lengthA());
+		assertEquals(0, array.lengthA());
 		
 		array = array.setA(0, 1);
 		array = array.setA(1, 2);
@@ -87,7 +87,7 @@ public class ADTArrayFunctionalTest {
 		
 		
 		array = ADTArray.initA();
-		assertEquals(-1, array.lengthA());
+		assertEquals(0, array.lengthA());
 		
 		for(int i = 0; i <= 10000; i++){
 			array = array.setA(i, i);
@@ -124,7 +124,7 @@ public class ADTArrayFunctionalTest {
 	
 	@Test
 	public void lengthATest(){
-		assertEquals(-1, array.lengthA());
+		assertEquals(0, array.lengthA());
 		
 		array = array.setA(0, 1);
 		array = array.setA(1, 2);

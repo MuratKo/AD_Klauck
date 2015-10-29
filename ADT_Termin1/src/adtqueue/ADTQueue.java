@@ -1,5 +1,6 @@
 package adtqueue;
 
+import adtarray.ADTArray;
 import adtstack.ADTStack;
 
 public class ADTQueue {
@@ -125,5 +126,34 @@ public class ADTQueue {
 		    umgestapelt.setStackOUT(stackOUTPUT);
 		    return umgestapelt;
 		}
+		
+		@Override
+	    public boolean equals(Object o) {
+			
+	        if (o == this) return true;
+	        
+	        if(o instanceof ADTQueue){
+	        	ADTQueue q1 = ADTQueue.createQ();
+	    		q1.setStackIN(this.getStackIN());
+	    		q1.setStackOUT(this.getStackOUT());
+	    		
+	    		ADTQueue q2 = ADTQueue.createQ();
+	    		q2.setStackIN(((ADTQueue) o).getStackIN());
+	    		q2.setStackOUT(((ADTQueue) o).getStackOUT());
+	    		
+	    		
+	        	while(!q1.isEmptyQ()){
+	        		if(!(q1.front() == q2.front())) return false;
+	        		q1 = q1.dequeue();
+	        		q2 = q2.dequeue();
+	        	}
+	        	if(!q2.isEmptyQ()) return false;
+	        	
+	        }else{
+	        	return false;
+	        }
+	        	
+	        return true;
+	    }
 
 }
