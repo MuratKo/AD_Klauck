@@ -41,7 +41,15 @@ public class SortNum {
 	}
 	
 	public static void sortNum(int anzahlZahlen, boolean bool){
-		File file = new File("/home/murat/Dokumente/Uni/AD/zahlen/z.dat");
+		JFileChooser chooser = new JFileChooser("/home/murat/Dokumente/Uni/AD/Termin2/Programm");
+		//File file = new File("/home/murat/Dokumente/Uni/AD/zahlen/z.dat");
+		
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("ONLY .dat", "dat");
+		chooser.setFileFilter(filter);
+		
+		chooser.showSaveDialog(null);
+		
+		File file = new File(chooser.getSelectedFile().getAbsolutePath());
 		
 		try {
 			file.createNewFile();

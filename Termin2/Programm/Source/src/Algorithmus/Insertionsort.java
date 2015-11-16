@@ -13,7 +13,6 @@ public class Insertionsort {
 			k = array.getA(i);
 			while(array.getA(j-1) > k){
 				
-				
 				array = array.setA(j, array.getA(j-1));
 				j--;
 			}

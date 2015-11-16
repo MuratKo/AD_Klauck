@@ -1,6 +1,7 @@
 package Runner;
 
 import Algorithmus.Insertionsort;
+import Algorithmus.InsertionsortMeasurement;
 import Exceptions.NoFileSelectedException;
 import Helper.Reader;
 import Helper.SortNum;
@@ -15,24 +16,16 @@ public class Runner {
 		
 		try {
 			
-			SortNum.sortNum(10);
+			SortNum.sortNum(3, true);
 			
 			
 			ADTArray array = Reader.reader();
 			
+			InsertionsortMeasurement.insertionsort(array, 0, array.lengthA());
 			
-			
-			
-			for(int i = 0; i < array.lengthA(); i++){
-				System.out.println(array.getA(i));
-			}
-			
-			System.out.println("\n");
-			array = Insertionsort.insertionsort(array,0,array.lengthA());
-			
-			for(int i = 0; i < array.lengthA(); i++){
-				System.out.println(array.getA(i));
-			}
+			System.out.println("read: " + InsertionsortMeasurement.getRead());
+			System.out.println("write: " + InsertionsortMeasurement.getWrite());
+			System.out.println("time: " + InsertionsortMeasurement.getTime() + "ms");
 			
 		} catch (NoFileSelectedException e) {
 			System.out.println("Es wurde keine Datei ausgewählt!");
