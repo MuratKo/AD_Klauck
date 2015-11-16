@@ -102,7 +102,7 @@ public class InsertionsortTest {
 			elem--;
 		}
 //		
-		//array = Insertionsort.insertionsort(array, 0, belastung);
+		array = Insertionsort.insertionsort(array, 0, belastung);
 //		
 //		int pre = array.getA(0);
 		for(int i = 0; i < belastung; i++){
