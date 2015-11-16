@@ -8,11 +8,11 @@ public class Insertionsort {
 		ADTArray array = a;
 		
 		int j, k;
-		for(int i = start; i < end; i++){
+		for(int i = start+1; i < end; i++){
 			j = i;
 			k = array.getA(i);
-			while(array.getA(j-1) > k){
-				
+			while(array.getA(j-1) > k && j >= 1){
+				System.out.println(j);
 				array = array.setA(j, array.getA(j-1));
 				j--;
 			}

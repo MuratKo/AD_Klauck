@@ -15,11 +15,11 @@ public class InsertionsortMeasurement {
 		ADTArray array = a;
 		
 		int j, k;
-		for(int i = start; i < end; i++){
+		for(int i = start+1; i < end; i++){
 			j = i;
 			k = array.getA(i);
 			read++;
-			while(array.getA(j-1) > k){
+			while(array.getA(j-1) > k && j >= 1){
 				read++;
 				
 				array = array.setA(j, array.getA(j-1));

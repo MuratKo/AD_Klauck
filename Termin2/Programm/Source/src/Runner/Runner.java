@@ -16,16 +16,16 @@ public class Runner {
 		
 		try {
 			
-			SortNum.sortNum(3, true);
+			SortNum.sortNum(3500, false);
 			
 			
 			ADTArray array = Reader.reader();
-			
 			InsertionsortMeasurement.insertionsort(array, 0, array.lengthA());
 			
+			System.out.println("time: " + InsertionsortMeasurement.getTime() );
 			System.out.println("read: " + InsertionsortMeasurement.getRead());
 			System.out.println("write: " + InsertionsortMeasurement.getWrite());
-			System.out.println("time: " + InsertionsortMeasurement.getTime() + "ms");
+			
 			
 		} catch (NoFileSelectedException e) {
 			System.out.println("Es wurde keine Datei ausgewählt!");

@@ -86,7 +86,7 @@ public class InsertionsortTest {
 	public void testBelastung(){
 		
 		//Belastung mit 10.000
-		int belastung = 10000;
+		int belastung = 50000;
 		Random rand = new Random();
 		int elem = belastung;
 		for(int i = 0; i < belastung; i++){
@@ -97,7 +97,7 @@ public class InsertionsortTest {
 //			}else{
 //				array = array.setA(i, i);
 //			}
-			array = array.setA(i, elem);
+			array = array.setA(i, i);
 			
 			elem--;
 		}
@@ -106,7 +106,7 @@ public class InsertionsortTest {
 //		
 //		int pre = array.getA(0);
 		for(int i = 0; i < belastung; i++){
-			System.out.println(array.getA(i));
+			//System.out.println(array.getA(i));
 //			assertTrue(pre < array.getA(i));
 //			pre = array.getA(i);
 		}
