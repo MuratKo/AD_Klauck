@@ -12,11 +12,9 @@ public class Insertionsort {
 			j = i;
 			k = array.getA(i);
 			while(array.getA(j-1) > k && j >= 1){
-				System.out.println(j);
 				array = array.setA(j, array.getA(j-1));
 				j--;
 			}
-			//System.out.println(k);
 			array = array.setA(j, k);
 		}
 		
