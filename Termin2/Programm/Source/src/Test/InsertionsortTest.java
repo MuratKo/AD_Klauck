@@ -1,6 +1,7 @@
 package Test;
 
 import static org.junit.Assert.*;
+import adtarray.ADTArray;
 
 import java.util.Random;
 
@@ -9,7 +10,8 @@ import org.junit.Test;
 
 import Algorithmus.Insertionsort;
 import Algorithmus.InsertionsortMeasurement;
-import adtarray.ADTArray;
+//import adtarray.ADTArray;
+
 
 public class InsertionsortTest {
 	
