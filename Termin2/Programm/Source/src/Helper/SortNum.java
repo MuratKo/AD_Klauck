@@ -11,7 +11,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class SortNum {
 	
 	public static void sortNum(int anzahlZahlen){
-		JFileChooser chooser = new JFileChooser("/home/murat/Dokumente/Uni/AD/Termin2/Programm");
+		JFileChooser chooser = new JFileChooser("C:/Users/abp516/Documents/AD_Klauck/Termin2/Programm/zahlen");
 		//File file = new File("/home/murat/Dokumente/Uni/AD/zahlen/z.dat");
 		
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("ONLY .dat", "dat");
