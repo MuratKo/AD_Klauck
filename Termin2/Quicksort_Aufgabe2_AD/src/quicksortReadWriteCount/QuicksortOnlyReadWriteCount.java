@@ -99,35 +99,39 @@ public class QuicksortOnlyReadWriteCount {
 		
 	}
 	
-	private static int getMedianOf3(int i, int j) {
+	private static int getMedianOf3(int iIndex, int jIndex) {
+
 		int pivotIndex;
-		int inDerMitte = (int) (i+j)/2;
+		int i = array.getA(iIndex);
+		int j = array.getA(jIndex);
+		int inDerMitteIndex = (int) (iIndex+jIndex)/2;
+		int inDerMitte = array.getA(inDerMitteIndex);
 		
 		if(i>=inDerMitte && i>= j) {
-			if(inDerMitte >= j) {
-				pivotIndex = j;
+			if(inDerMitte <= j) {
+				pivotIndex = jIndex;
 			}
 			else {
-				pivotIndex = inDerMitte;
+				pivotIndex = inDerMitteIndex;
 			}
 		}
 		else if(j>= i && j>=inDerMitte) {
-			if(inDerMitte >= i) {
-				pivotIndex = i;
+			if(inDerMitte <= i) {
+				pivotIndex = iIndex;
 			}
 			else {
-				pivotIndex = inDerMitte;
+				pivotIndex = inDerMitteIndex;
 			}
 		}
-		else if(inDerMitte>=i && inDerMitte>=j)
-			if(i>j) {
-				pivotIndex = j;
+		else if(inDerMitte >=i && inDerMitte >=j)
+			if(i <= j) {
+				pivotIndex = jIndex;
 			}
 			else {
-				pivotIndex = i;
+				pivotIndex = iIndex;
 			}
 		else {
-			pivotIndex = i;
+			pivotIndex = iIndex;
 		}
 		return pivotIndex;
 	}
