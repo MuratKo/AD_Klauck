@@ -1,5 +1,7 @@
 package Helper;
 
+import adtarray.ADTArray;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Exceptions.NoFileSelectedException;
-import adtarray.ADTArray;
+
 
 public class Reader {
 	public static ADTArray reader() throws NoFileSelectedException{
@@ -51,7 +53,7 @@ public class Reader {
 
 
 	private static File chooseFile() throws NoFileSelectedException{
-		JFileChooser chooser = new JFileChooser("/home/murat/Dokumente/Uni/AD/Termin2/Programm");
+		JFileChooser chooser = new JFileChooser("C:/Users/abp516/Documents/AD_Klauck/Termin2/Programm/zahlen");
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("ONLY .dat", "dat");
 		chooser.setFileFilter(filter);
 		
