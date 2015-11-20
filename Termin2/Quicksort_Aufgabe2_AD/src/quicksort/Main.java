@@ -21,7 +21,7 @@ public class Main {
 		//Einleser ein = new Einleser("C:/Users/VAIO PRO/Documents/SortNumOf100_false.txt");
 		//Einleser ein2 = new Einleser("C:/Users/VAIO PRO/Documents/GitHub/AD_Klauck/Termin2/Programm/zahlen.dat");
 		//Einleser ein3 = new Einleser("C:/Users/VAIO PRO/Desktop/zahlen.htm");
-		Einleser ein2 = new Einleser("C:/Users/VAIO PRO/Documents/GitHub/AD_Klauck/Termin2/Programm/16000.dat");
+		Einleser ein2 = new Einleser("C:/Users/VAIO PRO/Documents/GitHub/AD_Klauck/Termin2/Programm/zahlen/8000.dat");
 		//64.000 -> ca. 38,7 s
 		//a = ein.parse(a);
 		//a = ein2.parse(a);
@@ -55,13 +55,13 @@ public class Main {
 		}
 		*/
 		
-//		int i = 0;
-//		while(i < a.lengthA())
-//		{
-//			System.out.print(a.getA(i)+",");
-//			i++;
-//		}
-		//System.out.println("Position 0: "+a.getA(0));
+		int i = 0;
+		while(i < b.lengthA())
+		{
+			System.out.print(b.getA(i)+",");
+			i++;
+		}
+		System.out.println();
 		System.out.println("------------------------------------");
 		//a = Quicksort.quicksort(a, quicksort.Quicksort.Pivotauswahl.LINKS);
 		//a = Quicksort.quicksort(a, quicksort.Quicksort.Pivotauswahl.RECHTS);
@@ -70,20 +70,20 @@ public class Main {
 		//b = Quicksort.quicksort(b, quicksort.Quicksort.Pivotauswahl.RANDOM);
 		//b = quicksortOhneInsertionsort.QuicksortOnly.quicksort(b, QuicksortOnly.Pivotauswahl.LINKS);
 		
-		//b = quicksortLaufzeit.QuicksortOnlyLaufzeit.quicksort(b, QuicksortOnlyLaufzeit.Pivotauswahl.MEDIANOF3);
+		b = quicksortLaufzeit.QuicksortOnlyLaufzeit.quicksort(b, QuicksortOnlyLaufzeit.Pivotauswahl.MEDIANOF3);
 		
-		b = quicksortReadWriteCount.QuicksortOnlyReadWriteCount.quicksort(b, QuicksortOnlyReadWriteCount.Pivotauswahl.MEDIANOF3);
+		//b = quicksortReadWriteCount.QuicksortOnlyReadWriteCount.quicksort(b, QuicksortOnlyReadWriteCount.Pivotauswahl.MEDIANOF3);
 		
-//		int k = 0;
-//		while(k < b.lengthA())
-//		{
-//			System.out.print(b.getA(k)+",");
-//			k++;
-//		}
+		int k = 0;
+		while(k < b.lengthA())
+		{
+			System.out.print(b.getA(k)+",");
+			k++;
+		}
 		System.out.println();
-		//System.out.println("Laufzeit :"+Laufzeit.getRuntimeInMS()+" ms");
-		System.out.println("Lesezugriffe :"+QuicksortOnlyReadWriteCount.getReadCounts());
-		System.out.println("Schreibzugriffe :"+QuicksortOnlyReadWriteCount.getWriteCounts());
+		System.out.println("Laufzeit :"+Laufzeit.getRuntimeInMS()+" ms");
+		//System.out.println("Lesezugriffe :"+QuicksortOnlyReadWriteCount.getReadCounts());
+		//System.out.println("Schreibzugriffe :"+QuicksortOnlyReadWriteCount.getWriteCounts());
 		
 		/*
 		System.out.println("Position  0: "+a.getA(0));

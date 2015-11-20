@@ -17,7 +17,7 @@ public class Quicksort {
 		return array;
 	}
 	
-	public static void quicksort_tmp(int iLinks, int iRechts, Pivotauswahl pivotAuswahl) {
+	private static void quicksort_tmp(int iLinks, int iRechts, Pivotauswahl pivotAuswahl) {
 		
 		//print(array);
 		

@@ -82,19 +82,19 @@ public class QuicksortTestLINKS {
 		
 		//Belastung mit 10.000
 		int belastung = 10000;
+		int elementMax = 1000;
 		
 		int p = 0;
 		while(p < belastung){
-			array = array.setA(p, (Math.random()*belastung));
+			int element = (int) (Math.random()*elementMax);
+			array = array.setA(p, element);
 			p++;
 		}
+
 		array = Quicksort.quicksort(array, Quicksort.Pivotauswahl.LINKS);;
-		
-		int pre = array.getA(0);
-		for(int i = 0; i < belastung; i++){
-			//System.out.println(array.getA(i));
-			assertTrue(pre == array.getA(i));
-			pre = array.getA(i);
+
+		for(int i = 0; i < array.lengthA()-1; i++){
+			assertTrue(array.getA(i)<=array.getA(i+1));
 		}
 	}
 
