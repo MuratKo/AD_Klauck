@@ -1,7 +1,6 @@
-package Algorithmus;
+package quicksort;
 
 import Algorithmus.Insertionsort;
-import Statistik.Laufzeit;
 import adtarray.ADTArray;
 
 public class Quicksort {
@@ -9,23 +8,21 @@ public class Quicksort {
 	private static ADTArray array;
 	
 	public static ADTArray quicksort(ADTArray inArray, Pivotauswahl pivotAuswahl) {
-			Laufzeit.setStart(System.nanoTime());
 		array = inArray;
 		int iLinks = 0; //Index vom Element ganz links
 		//System.out.println("iLinks: "+iLinks);
 		int iRechts = inArray.lengthA()-1; //Index vom letzten Element
 		//System.out.println("iRechts: "+iRechts);
 		quicksort_tmp(iLinks, iRechts, pivotAuswahl);
-			Laufzeit.setEnde(System.nanoTime());
 		return array;
 	}
 	
-	public static void quicksort_tmp(int iLinks, int iRechts, Pivotauswahl pivotAuswahl) {
+	private static void quicksort_tmp(int iLinks, int iRechts, Pivotauswahl pivotAuswahl) {
 		
 		//print(array);
 		
 		//weniger als 12 Elemente noch zu sortieren -> nutze Insertionsort
-		if(iRechts - iLinks < 5) {
+		if(iRechts - iLinks < 12) {
 			Insertionsort.insertionsort(array, iLinks, iRechts+1);
 		}
 		else {
@@ -103,35 +100,39 @@ public class Quicksort {
 		
 	}
 	
-	private static int getMedianOf3(int i, int j) {
+	private static int getMedianOf3(int iIndex, int jIndex) {
+
 		int pivotIndex;
-		int inDerMitte = (int) (i+j)/2;
+		int i = array.getA(iIndex);
+		int j = array.getA(jIndex);
+		int inDerMitteIndex = (int) (iIndex+jIndex)/2;
+		int inDerMitte = array.getA(inDerMitteIndex);
 		
 		if(i>=inDerMitte && i>= j) {
-			if(inDerMitte >= j) {
-				pivotIndex = j;
+			if(inDerMitte <= j) {
+				pivotIndex = jIndex;
 			}
 			else {
-				pivotIndex = inDerMitte;
+				pivotIndex = inDerMitteIndex;
 			}
 		}
 		else if(j>= i && j>=inDerMitte) {
-			if(inDerMitte >= i) {
-				pivotIndex = i;
+			if(inDerMitte <= i) {
+				pivotIndex = iIndex;
 			}
 			else {
-				pivotIndex = inDerMitte;
+				pivotIndex = inDerMitteIndex;
 			}
 		}
-		else if(inDerMitte>=i && inDerMitte>=j)
-			if(i>j) {
-				pivotIndex = j;
+		else if(inDerMitte >=i && inDerMitte >=j)
+			if(i <= j) {
+				pivotIndex = jIndex;
 			}
 			else {
-				pivotIndex = i;
+				pivotIndex = iIndex;
 			}
 		else {
-			pivotIndex = i;
+			pivotIndex = iIndex;
 		}
 		return pivotIndex;
 	}
