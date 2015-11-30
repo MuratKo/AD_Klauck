@@ -1,13 +1,17 @@
 package Runner;
 
+import java.io.IOException;
+
 import Helper.SortNum;
+import Helper.TreePNG;
 
 public class Main {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		String path = "/home/murat/Dokumente/Uni/AD/Termin3/programme/zahlen/";
 		
@@ -22,6 +26,17 @@ public class Main {
 		
 		//bestcase
 		SortNum.sortNumWorstBaseCase(1000, path + "bestCase.dat", true);
+		
+		//graphViz Beispiel
+		String pathOfFile = "/home/murat/Dokumente/Uni/AD/Termin3/programme/Graphen/GraphDateien/";
+		String graphFileName = "beispiel.gv";
+		
+		String pathOfDestination = "/home/murat/Dokumente/Uni/AD/Termin3/programme/Graphen/Bilder/";
+		String pngFileName = "beispiel.png";
+		
+		TreePNG.treeToPNG(pathOfFile + graphFileName, pathOfDestination + pngFileName);
 	}
+
+
 
 }
