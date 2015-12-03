@@ -29,9 +29,7 @@ public class TestSortNum {
 		fileBestCase = SortNum.sortNum(10000, path + fileNameBestCase, Parameter.BEST_CASE);
 		
 		filenameWorseCase = "testWorseCase.dat";
-		fileWorseCase = SortNum.sortNum(10000, path + filenameWorseCase, Parameter.WORSE_CASE);
-	
-	
+		fileWorseCase = SortNum.sortNum(10000, path + filenameWorseCase, Parameter.WORST_CASE);
 	
 	}
 

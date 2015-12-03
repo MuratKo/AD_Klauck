@@ -29,7 +29,7 @@ public class SortNum {
 			case BEST_CASE:
 				newFile = sortNumWorstBaseCase(anzahlZahlen, path ,true);
 			break;
-			case WORSE_CASE:
+			case WORST_CASE:
 				newFile = sortNumWorstBaseCase(anzahlZahlen, path ,false);
 			break;
 		}
@@ -132,7 +132,7 @@ public class SortNum {
 	}
 
 	public enum Parameter{
-		RANDOM_WITH_DUPLICATES, RANDOM_WITHOUT_DUPLICATES, BEST_CASE, WORSE_CASE;
+		RANDOM_WITH_DUPLICATES, RANDOM_WITHOUT_DUPLICATES, BEST_CASE, WORST_CASE;
 	}
 
 }

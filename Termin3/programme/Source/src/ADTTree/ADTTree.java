@@ -14,6 +14,7 @@ public class ADTTree {
 	private static String graph = "";
 	
 	private ADTTree smallerElement, biggerElement;
+	
 	private int smallerTreeHight, biggerTreeHight;
 	int value;
 	private static boolean rotatedLeft = false;
