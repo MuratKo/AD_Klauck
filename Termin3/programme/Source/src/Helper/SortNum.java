@@ -10,7 +10,7 @@ public class SortNum {
 	
 	private static int numberRange = 1000;
 	
-	public static void sortNum(int anzahlZahlen, String path, boolean doubleNumbers){
+	public static File sortNum(int anzahlZahlen, String path, Parameter parameter){
 		
 		String defaultPath = "/home/murat/Dokumente/Uni/AD/Termin3/programme/zahlen/test.dat";
 		
@@ -18,17 +18,27 @@ public class SortNum {
 		
 		File file = new File(path);
 		
+		File newFile = null;
+		switch(parameter){
+			case RANDOM_WITH_DUPLICATES:
+				newFile = createFileWithDoubleNumbers(file, anzahlZahlen);
+			break;
+			case RANDOM_WITHOUT_DUPLICATES:
+				newFile = createFileWithoutDoubleNumbers(file, anzahlZahlen);
+			break;
+			case BEST_CASE:
+				newFile = sortNumWorstBaseCase(anzahlZahlen, path ,true);
+			break;
+			case WORSE_CASE:
+				newFile = sortNumWorstBaseCase(anzahlZahlen, path ,false);
+			break;
+		}
 		
-		
-		
-		if(doubleNumbers) createFileWithDoubleNumbers(file, anzahlZahlen);
-		
-		if(!doubleNumbers) createFileWithoutDoubleNumbers(file, anzahlZahlen);
-		
+		return newFile;
 		
 	}
 	
-	private static void createFileWithoutDoubleNumbers(File file, int anzahlZahlen) {
+	private static File createFileWithoutDoubleNumbers(File file, int anzahlZahlen) {
 		
 		//falls anzahl der zufälligen zahlen ohne doppelte größer ist als numberrange muss numberrange angepasst werden
 		if(anzahlZahlen > numberRange) numberRange = anzahlZahlen+500;
@@ -58,10 +68,10 @@ public class SortNum {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		return file;
 	}
 
-	private static void createFileWithDoubleNumbers(File file, int anzahlZahlen) {
+	private static File createFileWithDoubleNumbers(File file, int anzahlZahlen) {
 		
 		try {
 			file.createNewFile();
@@ -80,9 +90,10 @@ public class SortNum {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return file;
 	}
 
-	public static void sortNumWorstBaseCase(int anzahlZahlen, String path ,boolean bool){
+	private static File sortNumWorstBaseCase(int anzahlZahlen, String path ,boolean bool){
 		//File file = new File("/home/murat/Dokumente/Uni/AD/zahlen/z.dat");
 		
 		String defaultPath = "/home/murat/Dokumente/Uni/AD/Termin3/programme/zahlen/test.dat";
@@ -117,7 +128,11 @@ public class SortNum {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return file;
 	}
 
+	public enum Parameter{
+		RANDOM_WITH_DUPLICATES, RANDOM_WITHOUT_DUPLICATES, BEST_CASE, WORSE_CASE;
+	}
 
 }
