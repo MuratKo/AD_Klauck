@@ -9,6 +9,8 @@ import einleser.Einleser;
 import adtarray.ADTArray;
 
 import adt.AVLTree;
+import adt.AVLTreeRotation;
+import adt.AVLTreeTime;
 import Helper.SortNum;
 import Helper.TreePNG;
 
@@ -45,7 +47,7 @@ public class Main {
 		
 		TreePNG.treeToPNG(pathOfFile + graphFileName, pathOfDestination + pngFileName);*/
 		
-		AVLTree tree = AVLTree.create();
+		//AVLTree tree = AVLTree.create();
 		
 //		tree.insert(15);
 //		tree.insert(17);
@@ -132,8 +134,12 @@ public class Main {
 //			tree.insert(i);
 //		}
 		
+		AVLTree t = AVLTree.create();
 		
+		t.insert(1);
+		t.print("/home/murat/Dokumente/Uni/AD/Termin3/programme/Graphen/GraphDateien/", "1.gv");
 		
+		AVLTreeRotation tree = AVLTreeRotation.create();
 		
 		ADTArray array = ADTArray.initA();
 		Einleser ein = new Einleser("/home/murat/Dokumente/Uni/AD/Termin3/programme/zahlen/ohneDuplikate.dat");
@@ -143,7 +149,9 @@ public class Main {
 			tree.insert(array.getA(i));
 		}
 		
+		System.out.println(tree.getRotationRight());
 		tree.print("/home/murat/Dokumente/Uni/AD/Termin3/programme/Graphen/GraphDateien/", "ohneDuplikate.gv");
+		
 		
 	}
 

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import Helper.TreePNG;
 
-public class AVLTree {
+public class AVLTreeRotation {
 	
 	/*
 	 * Notwendinge static variablen für das erstellen der PNG-Datei
@@ -14,9 +14,15 @@ public class AVLTree {
 	private static String graph = "";
 	//-----------------
 	
+	/*
+	 * Rotationszähler
+	 */
+	private static int rotationLeft = 0;
+	private static int rotaionRight = 0;
+	//------------
 	
 	//linkes sowie rechtes Knoten des aktuellen Knotens
-	private AVLTree smallerElement, biggerElement;
+	private AVLTreeRotation smallerElement, biggerElement;
 	
 	//der wert des Knotens
 	private int value;
@@ -29,15 +35,15 @@ public class AVLTree {
 	 * („nichts“ -> avlTree)
 	 */
 	
-	private AVLTree(){
+	private AVLTreeRotation(){
 		this.smallerElement = null;
 		this.biggerElement = null;
 		this.value = -1;
 		this.high = 0;
 	}
 	
-	public static AVLTree create(){
-		return new AVLTree();
+	public static AVLTreeRotation create(){
+		return new AVLTreeRotation();
 	}
 	
 	//--------------
@@ -64,7 +70,7 @@ public class AVLTree {
 	//---------------
 	
 	
-	public AVLTree delete(int elem){
+	public AVLTreeRotation delete(int elem){
 		
 		
 		
@@ -210,7 +216,7 @@ public class AVLTree {
 		return 0;
 	}
 	
-	private void set(AVLTree tree) {
+	private void set(AVLTreeRotation tree) {
 		this.value = tree.value;
 		this.biggerElement = tree.biggerElement;
 		this.smallerElement = tree.smallerElement;
@@ -229,7 +235,10 @@ public class AVLTree {
 	 * (avlTree x elem -> avlTree)
 	 */
 	
-	public AVLTree insert(int elem){
+	public AVLTreeRotation insert(int elem){
+		
+		
+		
 		//falls knoten noch kein wert besitzt
 		if(value == -1){
 			this.value = elem;
@@ -317,11 +326,23 @@ public class AVLTree {
 		return this;
 	}
 	
+	public int getRotationLeft(){
+		return rotationLeft;
+	}
+	
+	public int getRotationRight(){
+		return rotaionRight;
+	}
+	
+	public int getRotationAll(){
+		return rotaionRight + rotationLeft;
+	}
+	
 	private void rotateRight() {
-		
+		rotaionRight++;
 		//Kopieren der aktuellen Werte der zu verschiebenden Knoten
-		AVLTree copyOfThis = this.copy();
-		AVLTree copyOfSmallerTree = this.smallerElement.copy();
+		AVLTreeRotation copyOfThis = this.copy();
+		AVLTreeRotation copyOfSmallerTree = this.smallerElement.copy();
 		
 		/*
 		 * linker Knoten übernimmt die Position von dem aktuellen Knoten
@@ -351,8 +372,9 @@ public class AVLTree {
 	}
 	
 	private void rotateLeft() {
-		AVLTree copyOfThis = this.copy();
-		AVLTree copyOfBiggerTree = this.biggerElement.copy();
+		rotationLeft++;
+		AVLTreeRotation copyOfThis = this.copy();
+		AVLTreeRotation copyOfBiggerTree = this.biggerElement.copy();
 		
 		//k übernimmt die Position von d
 		this.value = copyOfBiggerTree.getValue();
@@ -423,8 +445,8 @@ public class AVLTree {
 
 	
 	//Hilfsfunktion um ein ADTTree zu kopieren
-	private AVLTree copy(){
-		AVLTree tree = AVLTree.create();
+	private AVLTreeRotation copy(){
+		AVLTreeRotation tree = AVLTreeRotation.create();
 		tree.insert(this.getValue());
 		tree.biggerElement = this.biggerElement;
 		tree.smallerElement = this.smallerElement;
@@ -451,7 +473,7 @@ public class AVLTree {
 				this.insert(elem);
 			}
 		}else{
-			this.biggerElement = AVLTree.create();
+			this.biggerElement = AVLTreeRotation.create();
 			this.biggerElement.insert(elem);
 			
 			if(this.smallerElement == null) this.high++;
@@ -476,7 +498,7 @@ public class AVLTree {
 				}
 			}
 		}else{
-			this.smallerElement = AVLTree.create();
+			this.smallerElement = AVLTreeRotation.create();
 			this.smallerElement.insert(elem);
 			
 			if(this.biggerElement == null) this.high++;

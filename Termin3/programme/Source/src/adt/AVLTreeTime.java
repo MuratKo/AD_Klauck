@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import Helper.TreePNG;
 
-public class AVLTree {
+public class AVLTreeTime {
 	
 	/*
 	 * Notwendinge static variablen für das erstellen der PNG-Datei
@@ -14,9 +14,15 @@ public class AVLTree {
 	private static String graph = "";
 	//-----------------
 	
+	/*
+	 * Lauzeit Messung
+	 */
+	private static long time = -1;
+	private static long newTime = -1;
+	//------------
 	
 	//linkes sowie rechtes Knoten des aktuellen Knotens
-	private AVLTree smallerElement, biggerElement;
+	private AVLTreeTime smallerElement, biggerElement;
 	
 	//der wert des Knotens
 	private int value;
@@ -29,15 +35,15 @@ public class AVLTree {
 	 * („nichts“ -> avlTree)
 	 */
 	
-	private AVLTree(){
+	private AVLTreeTime(){
 		this.smallerElement = null;
 		this.biggerElement = null;
 		this.value = -1;
 		this.high = 0;
 	}
 	
-	public static AVLTree create(){
-		return new AVLTree();
+	public static AVLTreeTime create(){
+		return new AVLTreeTime();
 	}
 	
 	//--------------
@@ -64,7 +70,7 @@ public class AVLTree {
 	//---------------
 	
 	
-	public AVLTree delete(int elem){
+	public AVLTreeTime delete(int elem){
 		
 		
 		
@@ -210,7 +216,7 @@ public class AVLTree {
 		return 0;
 	}
 	
-	private void set(AVLTree tree) {
+	private void set(AVLTreeTime tree) {
 		this.value = tree.value;
 		this.biggerElement = tree.biggerElement;
 		this.smallerElement = tree.smallerElement;
@@ -229,7 +235,13 @@ public class AVLTree {
 	 * (avlTree x elem -> avlTree)
 	 */
 	
-	public AVLTree insert(int elem){
+	public AVLTreeTime insert(int elem){
+		
+		if(time == -1){
+			time = System.currentTimeMillis();
+		}
+		
+		
 		//falls knoten noch kein wert besitzt
 		if(value == -1){
 			this.value = elem;
@@ -314,14 +326,19 @@ public class AVLTree {
 			}
 		}
 		
+		newTime = System.currentTimeMillis() - time;
 		return this;
+	}
+	
+	public long getTime(){
+		return newTime;
 	}
 	
 	private void rotateRight() {
 		
 		//Kopieren der aktuellen Werte der zu verschiebenden Knoten
-		AVLTree copyOfThis = this.copy();
-		AVLTree copyOfSmallerTree = this.smallerElement.copy();
+		AVLTreeTime copyOfThis = this.copy();
+		AVLTreeTime copyOfSmallerTree = this.smallerElement.copy();
 		
 		/*
 		 * linker Knoten übernimmt die Position von dem aktuellen Knoten
@@ -351,8 +368,8 @@ public class AVLTree {
 	}
 	
 	private void rotateLeft() {
-		AVLTree copyOfThis = this.copy();
-		AVLTree copyOfBiggerTree = this.biggerElement.copy();
+		AVLTreeTime copyOfThis = this.copy();
+		AVLTreeTime copyOfBiggerTree = this.biggerElement.copy();
 		
 		//k übernimmt die Position von d
 		this.value = copyOfBiggerTree.getValue();
@@ -423,8 +440,8 @@ public class AVLTree {
 
 	
 	//Hilfsfunktion um ein ADTTree zu kopieren
-	private AVLTree copy(){
-		AVLTree tree = AVLTree.create();
+	private AVLTreeTime copy(){
+		AVLTreeTime tree = AVLTreeTime.create();
 		tree.insert(this.getValue());
 		tree.biggerElement = this.biggerElement;
 		tree.smallerElement = this.smallerElement;
@@ -451,7 +468,7 @@ public class AVLTree {
 				this.insert(elem);
 			}
 		}else{
-			this.biggerElement = AVLTree.create();
+			this.biggerElement = AVLTreeTime.create();
 			this.biggerElement.insert(elem);
 			
 			if(this.smallerElement == null) this.high++;
@@ -476,7 +493,7 @@ public class AVLTree {
 				}
 			}
 		}else{
-			this.smallerElement = AVLTree.create();
+			this.smallerElement = AVLTreeTime.create();
 			this.smallerElement.insert(elem);
 			
 			if(this.biggerElement == null) this.high++;
