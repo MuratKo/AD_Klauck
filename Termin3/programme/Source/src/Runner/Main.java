@@ -150,6 +150,8 @@ public class Main {
 		}
 		
 		System.out.println(tree.getRotationRight());
+		System.out.println(tree.getRotationLeft());
+		System.out.println(tree.getRotationAll());
 		tree.print("/home/murat/Dokumente/Uni/AD/Termin3/programme/Graphen/GraphDateien/", "ohneDuplikate.gv");
 		
 		
