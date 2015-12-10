@@ -8,25 +8,25 @@ import Helper.TreePNG;
 public class AVLTree {
 	
 	/*
-	 * Notwendinge static variablen für das erstellen der PNG-Datei
+	 * Notwendinge static variablen fuer das erstellen der PNG-Datei
 	 */
 	private static boolean root = true;
 	private static String graph = "";
 	//-----------------
 	
 	
-	//linkes sowie rechtes Knoten des aktuellen Knotens
+	//linker sowie rechter Knoten des aktuellen Knotens
 	private AVLTree smallerElement, biggerElement;
 	
 	//der wert des Knotens
 	private int value;
 	
-	//die höhe des knotens
+	//die hoehe des knotens
 	private int high;
 	
 	/*
 	 * create: ein leeren ADT-AVLTree erstellen				
-	 * („nichts“ -> avlTree)
+	 * (nichts -> avlTree)
 	 */
 	
 	private AVLTree(){
@@ -43,7 +43,7 @@ public class AVLTree {
 	//--------------
 	
 	/*
-	 * Abfrage, ob der ADT-AVLTree kein Knoten enthält
+	 * Abfrage, ob der ADT-AVLTree kein Knoten enthaelt
 	 * (avlTree -> Wahrheitswert) 
 	 * -1 -> kein knoten
 	 */
@@ -56,7 +56,7 @@ public class AVLTree {
 	
 	
 	/*
-	 * Höhe des Knotens
+	 * Hoehe des Knotens
 	 */
 	public int high(){
 		return this.high;
@@ -65,8 +65,6 @@ public class AVLTree {
 	
 	
 	public AVLTree delete(int elem){
-		
-		
 		
 		//find element
 		if(elem > this.value){
@@ -78,17 +76,17 @@ public class AVLTree {
 			
 			//Element ist ein Blatt
 			if(this.smallerElement == null && this.biggerElement == null){
-				this.reset();
+				this.reset(); //knoten wird zum leeren AVLTree
 			}
 			
 			//Element ist kein Blatt
 			int newValue = -1;
-				//Suche im linken Baum nach größten wert
+				//Suche im linken Baum nach groessten wert und speichere ihn
 			if(this.smallerElement != null && this.biggerElement == null){
 				newValue = this.smallerElement.searchInBigger();
 			}
 			
-				//Suche im rechten Baum nach kleinsten wert
+		    	//Suche im rechten Baum nach kleinsten wert
 			if(this.biggerElement != null){
 				newValue = this.biggerElement.searchInSmaller();
 			}
@@ -99,8 +97,12 @@ public class AVLTree {
 			
 			
 		}
+		
 		this.proofBalance();
+		
+		//Knoten der reseted wurde, wird geloescht
 		this.setSubTreeToNullIFMinus1();
+		
 		this.calcHigh();
 		
 		return this;
@@ -113,7 +115,7 @@ public class AVLTree {
 		}else{
 			//kleinsten wert gefunden
 			newValue = this.value;
-			//hat der kleinste wert noch rechten teilbaum
+			//hat der Knoten mit dem kleinsten wert noch rechten teilbaum
 			if(this.biggerElement != null){
 				this.set(biggerElement);
 			}else{
@@ -138,9 +140,9 @@ public class AVLTree {
 		if(this.biggerElement != null){
 			newValue = this.biggerElement.searchInBigger();
 		}else{
-			//größten wert gefunden
+			//groessten wert gefunden
 			newValue = this.value;
-			//hat der größe wert noch linken teilbaum
+			//hat der Knoten mit dem groessten wert noch einen linken teilbaum
 			if(this.smallerElement != null){
 				this.set(smallerElement);
 			}else{
@@ -174,7 +176,7 @@ public class AVLTree {
 		this.calcHigh();
 		
 			int diff = this.getDiff();
-			//Löschung erfolgte im rechten teilbaum
+			//Loeschung erfolgte im rechten teilbaum
 			if(diff < -1){
 				//betrachte linken teilbaum
 				diff = this.smallerElement.getDiff();
@@ -185,7 +187,7 @@ public class AVLTree {
 					this.rotateRight();
 				}
 			}
-			//Löschung erfolgte im linken teilbaum
+			//Loeschung erfolgte im linken teilbaum
 			else if(diff > 1){
 				//betrachte rechten teilbaum
 				diff = this.biggerElement.getDiff();
@@ -196,7 +198,7 @@ public class AVLTree {
 					this.rotateLeft();
 				}
 			}
-//			this.calcHigh();
+
 	}
 
 	private int getDiff(){
@@ -225,7 +227,7 @@ public class AVLTree {
 	}
 
 	/*
-	 * insert: Ein Knoten wird an richtiger Position an dem AVLTree eingehängt, wobei das Element dem value des neu erstelten Knotens darstellt.
+	 * insert: Ein Knoten wird an richtiger Position an dem AVLTree eingehaengt, wobei das Element dem value des neu erstelten Knotens darstellt.
 	 * (avlTree x elem -> avlTree)
 	 */
 	
@@ -233,10 +235,10 @@ public class AVLTree {
 		//falls knoten noch kein wert besitzt
 		if(value == -1){
 			this.value = elem;
-			//knoten besitzt höhe 1
+			//knoten besitzt hoehe 1
 			this.high = 1;
 		}
-		//falls elem größer ist als value
+		//falls elem groesser ist als value
 		else if(elem > this.value){
 			insertInBiggerTree(elem);
 		}
@@ -256,7 +258,7 @@ public class AVLTree {
 		
 		int diff = biggerHigh - smallerHigh;
 		
-		//Übergewicht besteht im rechten teilbaum
+		//Uebergewicht besteht im rechten teilbaum
 		if(diff >= 2){
 			
 			/*
@@ -281,13 +283,9 @@ public class AVLTree {
 				
 				int bigHigh = this.high();
 				rotateLeft();
-				
-				//Anpassung der Höhen nach der Rotation
-//				this.high = bigHigh-1;
-//				this.smallerElement.high -= 2;
 			}
 		}
-		//Übergewicht besteht im linken Teilbaum
+		//Uebergewicht besteht im linken Teilbaum
 		else if(diff <= -2){
 			
 			/*
@@ -324,7 +322,7 @@ public class AVLTree {
 		AVLTree copyOfSmallerTree = this.smallerElement.copy();
 		
 		/*
-		 * linker Knoten übernimmt die Position von dem aktuellen Knoten
+		 * linker Knoten uebernimmt die Position von dem aktuellen Knoten
 		 */
 		this.value = copyOfSmallerTree.getValue();
 		if(copyOfSmallerTree.smallerElement != null){
@@ -333,7 +331,7 @@ public class AVLTree {
 			this.smallerElement = null;
 		}
 		this.biggerElement = copyOfThis.copy();
-		// Hat Position übernommen
+		// Hat Position Uebernommen
 		
 		
 		//Der rechte Teilbaum von k wird der neue linke Teilbaum von d. d selbst wird neuer rechter Teilbaum von k.
@@ -343,7 +341,7 @@ public class AVLTree {
 			this.biggerElement.smallerElement = null;
 		}
 		
-		//erst die höhe der unterbäume anpassen
+		//erst die hoehe der unterbaeume anpassen
 		if(this.biggerElement.biggerElement != null) this.biggerElement.biggerElement.calcHigh();
 		if(this.smallerElement != null)	this.smallerElement.calcHigh();
 		if(this.biggerElement != null ) this.biggerElement.calcHigh();
@@ -354,7 +352,7 @@ public class AVLTree {
 		AVLTree copyOfThis = this.copy();
 		AVLTree copyOfBiggerTree = this.biggerElement.copy();
 		
-		//k übernimmt die Position von d
+		//k Uebernimmt die Position von d
 		this.value = copyOfBiggerTree.getValue();
 		if(copyOfBiggerTree.biggerElement != null){
 			this.biggerElement = copyOfBiggerTree.biggerElement.copy();
@@ -371,7 +369,7 @@ public class AVLTree {
 			this.smallerElement.biggerElement = null;
 		}
 		
-		//erst die höhe der unterbäume anpassen
+		//erst die hoehe der unterbaeume anpassen
 		if(this.smallerElement.smallerElement != null) this.smallerElement.smallerElement.calcHigh();
 		if(this.smallerElement != null)	this.smallerElement.calcHigh();
 		if(this.biggerElement != null ) this.biggerElement.calcHigh();
@@ -380,10 +378,10 @@ public class AVLTree {
 
 	private void calcHigh() {
 		
-		//Teilbäume mit dem wert -1 auf null setzen
+		//Teilbaeume mit dem wert -1 auf null setzen
 		this.setSubTreeToNullIFMinus1();
 		
-		//höhe des aktuellen sowie die nachbarknoten neu berechnen
+		//hoehe des aktuellen sowie die nachbarknoten neu berechnen
 		if(this.value != -1){
 			if(this.biggerElement == null && this.smallerElement != null) this.high = this.smallerElement.high() + 1;
 			if(this.biggerElement != null && this.smallerElement == null) this.high = this.biggerElement.high() + 1;
@@ -432,7 +430,7 @@ public class AVLTree {
 		return tree;
 	}
 
-	//Funktion die ein Knoten am rechten Teilbaum anhängt
+	//Funktion die ein Knoten am rechten Teilbaum anhaengt
 	private void insertInBiggerTree(int elem) {
 		
 		if(this.biggerElement != null){

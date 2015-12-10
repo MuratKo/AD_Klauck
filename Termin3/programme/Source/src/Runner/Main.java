@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import einleser.Einleser;
-
 import adtarray.ADTArray;
-
 import adt.AVLTree;
 import adt.AVLTreeRotation;
 import adt.AVLTreeTime;
@@ -137,26 +135,23 @@ public class Main {
 		AVLTree t = AVLTree.create();
 		
 		t.insert(1);
-		t.print("/home/murat/Dokumente/Uni/AD/Termin3/programme/Graphen/GraphDateien/", "1.gv");
+		t.print(PATH, "1.gv");
 		
-		AVLTreeRotation tree = AVLTreeRotation.create();
+//		AVLTreeRotation tree = AVLTreeRotation.create();
+//		
+//		ADTArray array = ADTArray.initA();
+//		Einleser ein = new Einleser("/home/murat/Dokumente/Uni/AD/Termin3/programme/zahlen/ohneDuplikate.dat");
+//		array = ein.parse(array);
+//		
+//		for(int i = 0; i < array.lengthA(); i++){
+//			tree.insert(array.getA(i));
+//		}
 		
-		ADTArray array = ADTArray.initA();
-		Einleser ein = new Einleser("/home/murat/Dokumente/Uni/AD/Termin3/programme/zahlen/ohneDuplikate.dat");
-		array = ein.parse(array);
 		
-		for(int i = 0; i < array.lengthA(); i++){
-			tree.insert(array.getA(i));
-		}
-		
-		System.out.println(tree.getRotationRight());
-		System.out.println(tree.getRotationLeft());
-		System.out.println(tree.getRotationAll());
-		tree.print("/home/murat/Dokumente/Uni/AD/Termin3/programme/Graphen/GraphDateien/", "ohneDuplikate.gv");
 		
 		
 	}
 
-
+	public static final String PATH = "C:/Users/abp516.INFORMATIK/Documents/AD_Klauck/Termin3/Tests/png/";
 
 }
