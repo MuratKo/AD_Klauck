@@ -1,7 +1,10 @@
-package main;
+package messung;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-
-import Helper.SortNum;
+import adt.AVLTreeReadWrite;
 import adt.AVLTreeRotation;
 import adt.AVLTreeTime;
 import adtarray.ADTArray;
@@ -9,34 +12,40 @@ import einleser.Einleser;
 
 public class Main {
 
+	public static final String PATH = "C:/Users/abp516.INFORMATIK/Documents/AD_Klauck/Termin3/Tests/";
+	static Einleser ein;
+	
 	public static void main(String[] args) {
-//		//500 without duplicates
-//		SortNum.sortNum(500, "C:/Test/500WithoutDublicates.dat", false);
-//		//1000 without duplicates
-//		SortNum.sortNum(1000, "C:/Test/1000WithoutDublicates.dat", false);
-//		//2000 without duplicates
-//		SortNum.sortNum(2000, "C:/Test/2000WithoutDublicates.dat", false);
-//		//4000 without duplicates
-//		SortNum.sortNum(4000, "C:/Test/4000WithoutDublicates.dat", false);
-//		//8000 without duplicates
-//		SortNum.sortNum(8000, "C:/Test/8000WithoutDublicates.dat", false);
-//		//16000 without duplicates
-//		SortNum.sortNum(16000, "C:/Test/16000WithoutDublicates.dat", false);
-//		//32000 without duplicates
-//		SortNum.sortNum(32000, "C:/Test/32000WithoutDublicates.dat", false);
-//		//64000 without duplicates
-//		SortNum.sortNum(64000, "C:/Test/64000WithoutDublicates.dat", false);
-//		//128000 without duplicates
-//		SortNum.sortNum(128000, "C:/Test/128000WithoutDublicates.dat", false);
-		Main.time();
+		
+		
+		File file = new File("C:/Users/abp516.INFORMATIK/Documents/AD_Klauck/Termin3/Messung/avltree.csv");
 
-//		Main.rotationLeft();
-//		Main.rotationRight();
+		try {
+			file.createNewFile();
+
+			PrintWriter writer;
+
+			writer = new PrintWriter(file);
+			
+			writer.write("500;1000;2000;4000;8000;16000;32000;64000;128000;\n");
+			
+			writer = Main.readWrite(writer);
+			
+			
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public static void time() {
+	
+	public static PrintWriter time(PrintWriter writer) {
 		//Messung Zeit
-		String pathStart = "C:/Users/VAIO PRO/Documents/GitHub/AD_Klauck/Termin3/Tests/";
+		String pathStart = PATH;
 		Integer filename = 500;
 		String pathEnde = "WithoutDublicates.dat";
 		
@@ -58,13 +67,15 @@ public class Main {
 				//Zahlen verdoppeln
 				//System.out.println(filename+" "+avl.getTime()+" ms");
 				System.out.print(avl.getTime()+";");
+				writer.write(avl.getTime()+";");
 				filename += filename;	
 			}
+			return writer;
 		}
 	
-	public static void rotationLeft() {
+	public static PrintWriter rotation(PrintWriter writer) {
 		//Messung Rotationen (links)
-		String pathStart = "C:/Users/VAIO PRO/Documents/GitHub/AD_Klauck/Termin3/Tests/";
+		String pathStart = PATH;
 		Integer filename = 500;
 		String pathEnde = "WithoutDublicates.dat";
 		
@@ -85,14 +96,15 @@ public class Main {
 				}
 				//Zahlen verdoppeln
 				//System.out.println(filename+" "+avl.getRotationLeft());
-				System.out.print(avl.getRotationLeft()+";");
+				writer.write(avl.getRotationAll()+";");
 				filename += filename;
 			}
+			return writer;
 		}
 	
-	public static void rotationRight() {
+	public static PrintWriter readWrite(PrintWriter writer) {
 		//Messung Rotationen (rechts)
-		String pathStart = "C:/Users/VAIO PRO/Documents/GitHub/AD_Klauck/Termin3/Tests/";
+		String pathStart = PATH;
 		Integer filename = 500;
 		String pathEnde = "WithoutDublicates.dat";
 		
@@ -101,7 +113,7 @@ public class Main {
 		int letzteMessung = 128000;
 			for(int i=filename; i<=letzteMessung ;i=i*2) {
 				
-				AVLTreeRotation avl = AVLTreeRotation.create();
+				AVLTreeReadWrite avl = AVLTreeReadWrite.create();
 				
 				einleser.Einleser ein = new Einleser(pathStart+filename.toString()+pathEnde);
 				array = ein.parse(array);
@@ -113,10 +125,11 @@ public class Main {
 				}
 				//Zahlen verdoppeln
 				//System.out.println(filename+" "+avl.getRotationRight());
-				System.out.print(avl.getRotationRight()+";");
+				writer.write(avl.getWrite()+";");
 				filename += filename;
 				
 			}
+			return writer;
 	}
 
 }
