@@ -6,9 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import exception.TextNotSplittedException;
+
 public class TextUmwandler {
 
-	public static String[] umwandeln(String pfad) throws Exception{
+	public static String[] umwandeln(String pfad) throws TextNotSplittedException, FileNotFoundException, IOException{
 		BufferedReader reader = null;
 		String[] result = null;
 		try {
@@ -34,7 +36,7 @@ public class TextUmwandler {
 		    }
 		}
 		
-		if(result == null) throw new Exception();
+		if(result == null) throw new TextNotSplittedException();
 		
 		return result;
 	}

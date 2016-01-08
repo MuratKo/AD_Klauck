@@ -1,5 +1,9 @@
 package adt;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import exception.PrimeNumberNotFoundException;
 
 public class ADTHashmap implements ADTHashmapInterface {
@@ -7,6 +11,7 @@ public class ADTHashmap implements ADTHashmapInterface {
 	private Strategy strategy;
 	private StringInteger[] map;
 	private Integer m;
+	private static int inserted = 0;
 
 	private ADTHashmap(Integer size, Strategy strategy) {
 		this.size = size;
@@ -20,9 +25,7 @@ public class ADTHashmap implements ADTHashmapInterface {
 		
 	}
 
-	public Integer getM(){
-		return m;
-	}
+	
 	private Integer primzahlNachKlauck() throws PrimeNumberNotFoundException {
 		int exponentMax = 1;
 		
@@ -138,56 +141,83 @@ public class ADTHashmap implements ADTHashmapInterface {
 
 	@Override
 	public ADTHashmap insert(String word) {
+		
+		if(inserted == m){
+			System.out.println("raus");
+			return this;
+		}
+		
 		ADTHashmap result = this.copy();
 		Integer address = hashfunktion(word);
 		Integer addressOhneSondierung = address;
 		// 1. Fall: Speicheradresse ist bereits belegt
-		if (map[address] != null) {
+		if (result.getMap()[address] != null) {
 			// a. mit dem gleichen Schluessel belegt
-			if (map[address].getKey().equals(word)) {
+			if (result.getMap()[address].getKey().equals(word)) {
 				// value wird um eins erhoeht
-				map[address].setValue(map[address].getValue() + 1);
+				result.getMap()[address].setValue(result.getMap()[address].getValue() + 1);
 			}
 			// b. mit anderem Schluessel belegt
 			else {
-				// adresse "h(k)" wird mittels Sondierungsfunktion neu berechnet
-				// Integer[] j_addressVerschiebung =
-				// sondierungsfunktion(0,word);
-				// Integer j = j_addressVerschiebung[0];
-				// Integer adressVerschiebung = j_addressVerschiebung[1];
-				// address = address + adressVerschiebung;
-				for (int j = 0; j <= size; j++) {
-					address = address - sondierungsfunktion(j, word);
-					// keine adresse gefunden
-					if (j == size) {
-						return result;
+				int j = 0;
+				while(true) {
+					
+					if(j == m*100) break; //maximale versuche
+					
+					
+					//Brent
+					if(strategy == Strategy.B){// && find(word) == 0){
+						StringInteger actual = result.getMap()[address];
+						Integer newAddressOfOldKey = (hashfunktion(actual.getKey()) - sondierungsfunktion(actual.getVersuche() + 1, actual.getKey())) % m;
+						newAddressOfOldKey = Math.abs(newAddressOfOldKey);
+						if(result.getMap()[newAddressOfOldKey] == null){
+							//versuche +1
+							actual.setVersuche(actual.getVersuche() + 1);
+							//new key an old key speichern
+							result.getMap()[address] = new StringInteger(word, 1, j);
+							result.getMap()[newAddressOfOldKey] = actual;
+							System.out.println("Ich " + result.getMap()[newAddressOfOldKey].getKey() + " wurde von " + result.getMap()[address].getKey() + " verdrängt ");
+							inserted++;
+							break;
+						}
 					}
-					// neue leere Speicheradresse gefunden
-					if (map[address] == null)
-						break;
-					// speicheradresse mit selben key gefunden
-					if (map[address].getKey().equals(word))
-						break;
+					
+					
 					// zuruecksetzen
 					address = addressOhneSondierung;
-				}
-				if (address > -1) {
-					// freie Speicheradresse
-					if (map[address] == null) {
-						map[address] = new StringInteger(word, 1);
+					
+					address = (address - sondierungsfunktion(j, word)) % m;
+					address = Math.abs(address);
+					
+					
+					// neue leere Speicheradresse gefunden
+					if (result.getMap()[address] == null){
+						result.getMap()[address] = new StringInteger(word, 1, j);
+						inserted++;
+						break; //aus der for-schleife 
 					}
-					// mit dem selben Schluessel belegte Speicheradresse
-					else {
-						map[address].setValue(map[address].getValue() + 1);
+					
+					// speicheradresse mit selben key gefunden
+					if (result.getMap()[address].getKey().equals(word)){
+						result.getMap()[address].setValue(result.getMap()[address].getValue() + 1);
+						break;
 					}
+					
+					j++;
 				}
+				
+				
+				
+				return result;
+				
 			}
 		}
 		// 2. Fall: Speicheradresse ist frei
 		else {
-			map[address] = new StringInteger(word, 1);
+			
+			map[address] = new StringInteger(word, 1,0);
+			inserted++;
 		}
-		System.out.println("Speicheradresse: " + address);
 		return this;
 	}
 
@@ -198,7 +228,8 @@ public class ADTHashmap implements ADTHashmapInterface {
 		case Q:
 			// hj(k) = (h(k) - s(j,k)) mod m mit s(j,k) = (-1)j * j2
 
-			return (int) (Math.pow(-1, j) * Math.pow(j, 2));
+			//return (int) (Math.pow(-1, j) * Math.pow(j, 2));
+			return ((int) Math.pow((int) (j/2), 2)) * (int) (Math.pow(-1, j));
 		case B:
 			/*
 			 * hj(k) = (h(k) - s(j,k)) mod m mit s(j,k) = j * h’(k) h’(k) = 1+(k
@@ -222,15 +253,46 @@ public class ADTHashmap implements ADTHashmapInterface {
 	public Integer hashfunktionDouble(String word) {
 		int h = 0;
 		for (int i = 0; i < word.length(); i++) {
-			h = (h * 128 + (int) word.charAt(i)) % m - 2;
+			h = (h * 128 + (int) word.charAt(i)) % (m - 2);
 		}
 		return h;
 	}
 
 	@Override
 	public Integer find(String word) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//Worst Case: alle Adressen belegt
+		ArrayList<Integer> listForWorstCase = new ArrayList<Integer>();
+		
+		int addressOhneSondierungfunktion = hashfunktion(word);
+		int address = addressOhneSondierungfunktion;
+		int j = 1;
+		
+		listForWorstCase.add(address);
+		
+		try{
+			while(!map[address].getKey().equals(word)){
+				
+				if( (listForWorstCase.size() != map.length) || j < m*100) return 0;
+				
+				address = addressOhneSondierungfunktion;
+				address = (address - sondierungsfunktion(j, word)) % m;
+				address = Math.abs(address);
+				if(!listForWorstCase.contains(address)){
+					listForWorstCase.add(address);
+				}
+				j++;
+			}
+			
+		
+			return map[address].getValue();
+		}catch (NullPointerException e){
+			return 0;
+		}
+	}
+	
+	public Integer getM(){
+		return m;
 	}
 
 	/**

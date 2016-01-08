@@ -6,10 +6,10 @@ public class StringInteger {
 	private Integer value;
 	private Integer versuche;
 	
-	public StringInteger(String key, Integer value){
+	public StringInteger(String key, Integer value, Integer versuch){
 		this.key = key;
 		this.value = value;
-		this.versuche = 0;
+		this.versuche = versuch;
 	}
 
 	public String getKey() {
