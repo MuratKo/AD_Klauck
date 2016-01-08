@@ -273,7 +273,7 @@ public class ADTHashmap implements ADTHashmapInterface {
 		try{
 			while(!map[address].getKey().equals(word)){
 				
-				if( (listForWorstCase.size() != map.length) || j < m*100) return 0;
+				if( (listForWorstCase.size() == map.length) || j > m*100) return 0; //NOCHMAL UEBERPRUEFEN!!!
 				
 				address = addressOhneSondierungfunktion;
 				address = (address - sondierungsfunktion(j, word)) % m;

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import exception.TextNotSplittedException;
@@ -53,14 +54,14 @@ public class Programm {
 
 	private void writeFile() {
 		try {
-			PrintWriter writer = new PrintWriter(file);
+			PrintWriter writer = new PrintWriter(file, "UTF-8");
 			writer.write("Dieses ist die Log-Datei des Files: " + filename + "\n\n");
 			
 			for(String word : listofWords){
 				writer.write(word + " -> " + map.find(word) + "\n");
 			}
 			writer.close();
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -69,7 +70,7 @@ public class Programm {
 	private void createFile() {
 		String filenameWithoutending = filename.substring(0, filename.lastIndexOf('.') );
 		
-		file = new File(this.pfad + filenameWithoutending + ".log");
+		file = new File(this.pfad + filenameWithoutending + ".log" );
 		try {
 			file.createNewFile();
 		} catch (IOException e) {
