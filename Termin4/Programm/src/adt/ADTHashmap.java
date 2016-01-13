@@ -168,8 +168,9 @@ public class ADTHashmap implements ADTHashmapInterface {
 					//Brent
 					if(strategy == Strategy.B){// && find(word) == 0){
 						StringInteger actual = result.getMap()[address];
-						Integer newAddressOfOldKey = (hashfunktion(actual.getKey()) - sondierungsfunktion(actual.getVersuche() + 1, actual.getKey())) % m;
-						newAddressOfOldKey = Math.abs(newAddressOfOldKey);
+						//(h(k) - s(j,k)) mod m
+						Integer newAddressOfOldKey = Math.floorMod((hashfunktion(actual.getKey()) - sondierungsfunktion(actual.getVersuche() + 1, actual.getKey())), m);
+						
 						if(result.getMap()[newAddressOfOldKey] == null){
 							//versuche +1
 							actual.setVersuche(actual.getVersuche() + 1);
@@ -186,8 +187,9 @@ public class ADTHashmap implements ADTHashmapInterface {
 					// zuruecksetzen
 					address = addressOhneSondierung;
 					
-					address = (address - sondierungsfunktion(j, word)) % m;
-					address = Math.abs(address);
+					//(h(k) - s(j,k)) mod m
+					address = Math.floorMod((address - sondierungsfunktion(j, word)), m);
+					
 					
 					
 					// neue leere Speicheradresse gefunden
@@ -276,8 +278,8 @@ public class ADTHashmap implements ADTHashmapInterface {
 				if( (listForWorstCase.size() == map.length) || j > m*100) return 0; //NOCHMAL UEBERPRUEFEN!!!
 				
 				address = addressOhneSondierungfunktion;
-				address = (address - sondierungsfunktion(j, word)) % m;
-				address = Math.abs(address);
+				//(h(k) - s(j,k)) mod m
+				address = Math.floorMod((address - sondierungsfunktion(j, word)), m);
 				if(!listForWorstCase.contains(address)){
 					listForWorstCase.add(address);
 				}

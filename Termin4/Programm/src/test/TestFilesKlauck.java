@@ -16,7 +16,7 @@ public class TestFilesKlauck {
 
 	@Before
 	public void setUp() throws Exception {
-		textb = TextUmwandler.umwandeln("C:/Users/abp516/Desktop/GitHubNEU/AD_Klauck/Termin4/Text/textb.txt");
+		textb = TextUmwandler.umwandeln("Z:/win7/3_Sem/AD_Klauck/Termin4/Text/textb.txt");
 		hashL = ADTHashmap.create(textb.length, Strategy.L);
 		for(int i = 0; i < textb.length; i++) {
 			hashL = hashL.insert(textb[i]);
