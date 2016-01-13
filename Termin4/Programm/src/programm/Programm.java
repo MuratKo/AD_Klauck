@@ -23,6 +23,7 @@ public class Programm {
 	private ADTHashmap map;
 	private ArrayList<String> listofWords;
 	
+	//Eigentlicher Aufruf des Programmes
 	public Programm(String filename, Strategy strategy){
 		pfad = filename.substring(0, filename.lastIndexOf('/') + 1);
 		this.filename = filename.substring(filename.lastIndexOf('/') + 1);
@@ -36,12 +37,13 @@ public class Programm {
 			e.printStackTrace();
 		}
 		
-		insertData();
+		insertDataIntoHashMap();
 		createFile();
 		writeFile();
 	}
 
-	private void insertData() {
+	
+	private void insertDataIntoHashMap() {
 		map = ADTHashmap.create(text.length, strategy);
 		
 		for(int i = 0; i < text.length; i++){

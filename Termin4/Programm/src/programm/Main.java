@@ -4,8 +4,10 @@ import adt.Strategy;
 
 public class Main {
 
+	final static String PATH = "Z:/win7/3_Sem/AD_Klauck/Termin4/Text/";
+	
 	public static void main(String[] args){
-		Programm p = new Programm("C:/Users/abp516/Desktop/GitHubNEU/AD_Klauck/Termin4/Text/washington.txt", Strategy.L);
+		Programm p = new Programm(PATH + "washington.txt", Strategy.L);
 	}
 	
 }

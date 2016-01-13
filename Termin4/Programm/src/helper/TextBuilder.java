@@ -50,11 +50,6 @@ public class TextBuilder {
 		return words;
 	}
 	
-//	public int getDifferentsWord(String[] words){
-//		Set<String> set = new HashSet<String>(Arrays.asList(words));
-//		return set.size();
-//	}
-	
 	public File createFile(String filename, int amountOfTotalWords){
 		differentWords = new HashSet<>();
 		File f = new File(path);
