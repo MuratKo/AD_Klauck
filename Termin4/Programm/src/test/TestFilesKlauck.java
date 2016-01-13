@@ -7,18 +7,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import adt.ADTHashmap;
+import adt.ADTHashmapMeasurement;
 import adt.Strategy;
 
 public class TestFilesKlauck {
 	
-	static ADTHashmap hashTextB, hashTextA, hashText0Words, hashTextCa100000Words;
+	static ADTHashmapMeasurement hashTextB, hashTextA, hashText0Words, hashTextCa100000Words;
 	static String[] textb, texta, text0Words, textCa100000Words;
 
 	@BeforeClass
 	public static void setUpTextB() throws Exception {
 		textb = TextUmwandler.umwandeln("Z:/win7/3_Sem/AD_Klauck/Termin4/Text/textb.txt");
-		hashTextB = ADTHashmap.create(textb.length, Strategy.L);
+		hashTextB = ADTHashmapMeasurement.create(textb.length, Strategy.L);
 		for(int i = 0; i < textb.length; i++) {
 			hashTextB = hashTextB.insert(textb[i]);
 		}
@@ -27,7 +27,7 @@ public class TestFilesKlauck {
 	@BeforeClass
 	public static void setUpTextA() throws Exception {
 		texta = TextUmwandler.umwandeln("Z:/win7/3_Sem/AD_Klauck/Termin4/Text/texta.txt");
-		hashTextA = ADTHashmap.create(texta.length, Strategy.L);
+		hashTextA = ADTHashmapMeasurement.create(texta.length, Strategy.L);
 		for(int i = 0; i < texta.length; i++) {
 			hashTextA = hashTextA.insert(texta[i]);
 		}
@@ -36,7 +36,7 @@ public class TestFilesKlauck {
 	@BeforeClass
 	public static void setUpText0Words() throws Exception {
 		text0Words = TextUmwandler.umwandeln("Z:/win7/3_Sem/AD_Klauck/Termin4/Text/text0Words.txt");
-		hashText0Words = ADTHashmap.create(text0Words.length, Strategy.L);
+		hashText0Words = ADTHashmapMeasurement.create(text0Words.length, Strategy.L);
 		for(int i = 0; i < text0Words.length; i++) {
 			hashText0Words = hashText0Words.insert(text0Words[i]);
 		}

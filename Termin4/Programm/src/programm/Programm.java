@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import exception.TextNotSplittedException;
 import helper.TextUmwandler;
-import adt.ADTHashmap;
+import adt.ADTHashmapMeasurement;
 import adt.Strategy;
 
 public class Programm {
@@ -20,7 +20,7 @@ public class Programm {
 	private Strategy strategy;
 	private String[] text;
 	private File file;
-	private ADTHashmap map;
+	private ADTHashmapMeasurement map;
 	private ArrayList<String> listofWords;
 	
 	//Eigentlicher Aufruf des Programmes
@@ -44,7 +44,7 @@ public class Programm {
 
 	
 	private void insertDataIntoHashMap() {
-		map = ADTHashmap.create(text.length, strategy);
+		map = ADTHashmapMeasurement.create(text.length, strategy);
 		
 		for(int i = 0; i < text.length; i++){
 			map = map.insert(text[i]);
