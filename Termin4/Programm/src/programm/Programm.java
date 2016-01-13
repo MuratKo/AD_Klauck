@@ -53,12 +53,15 @@ public class Programm {
 	}
 
 	private void writeFile() {
+		int x = 0;
 		try {
 			PrintWriter writer = new PrintWriter(file, "UTF-8");
 			writer.write("Dieses ist die Log-Datei des Files: " + filename + "\n\n");
 			
 			for(String word : listofWords){
+				x += map.find(word);
 				writer.write(word + " -> " + map.find(word) + "\n");
+				//System.out.println(word + " -> " + map.find(word) );
 			}
 			writer.close();
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {

@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
@@ -15,6 +18,7 @@ public class TextBuilder {
 	private String path;
 	private int amountOfDifferentWords;
 	Random rand;
+	Set<String> differentWords = new HashSet<>();
 
 	public TextBuilder(String path, int amountOfDifferentWords){
 		this.path = path;
@@ -42,12 +46,18 @@ public class TextBuilder {
 			int sizeOfWord = rand.nextInt(10 - 1 + 1) + 1;
 			words[x] = createWord();
 		}
+		
 		return words;
 	}
 	
+//	public int getDifferentsWord(String[] words){
+//		Set<String> set = new HashSet<String>(Arrays.asList(words));
+//		return set.size();
+//	}
+	
 	public File createFile(String filename, int amountOfTotalWords){
+		differentWords = new HashSet<>();
 		File f = new File(path);
-		
 		try {
 			File file = new File(path + filename);
 			file.createNewFile();
@@ -66,9 +76,12 @@ public class TextBuilder {
 			}
 			java.util.Collections.shuffle(wordsToShuffle);
 			
+			
 			for(int i = 0; i < amountOfTotalWords; i++){
+				differentWords.add(wordsToShuffle.get(i));
 				writer.write(wordsToShuffle.get(i) + " ");
 			}
+			
 			writer.close();
 			return file;
 		} catch (IOException e) {
@@ -78,5 +91,9 @@ public class TextBuilder {
 		
 		return f;
 		
+	}
+	
+	public int getAmountOfDifferentWords(){
+		return differentWords.size();
 	}
 }

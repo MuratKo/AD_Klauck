@@ -7,6 +7,7 @@ import java.util.Set;
 import exception.PrimeNumberNotFoundException;
 
 public class ADTHashmap implements ADTHashmapInterface {
+	
 	private Integer size;
 	private Strategy strategy;
 	private StringInteger[] map;
@@ -142,13 +143,18 @@ public class ADTHashmap implements ADTHashmapInterface {
 	@Override
 	public ADTHashmap insert(String word) {
 		
+		//Pruefen ob map schon voll ist
 		if(inserted == m){
-			System.out.println("raus");
+			System.out.println("map ist voll");
 			return this;
 		}
 		
+		//hashmap fuer funktionale programmierung kopieren
 		ADTHashmap result = this.copy();
+		//adresse berechnen vom key(word)
 		Integer address = hashfunktion(word);
+		
+		//Speichern der adresse, um sondierungfunktion immer wieder mit der ursprungsadresse aufrufen zu koennen
 		Integer addressOhneSondierung = address;
 		// 1. Fall: Speicheradresse ist bereits belegt
 		if (result.getMap()[address] != null) {
@@ -162,22 +168,26 @@ public class ADTHashmap implements ADTHashmapInterface {
 				int j = 0;
 				while(true) {
 					
+					//Frage: wann abrechen?
+					// wird durch sondierungsfunktion(Q oder B) alle freien plaetze gefunden?
 					if(j == m*100) break; //maximale versuche
 					
 					
 					//Brent
-					if(strategy == Strategy.B){// && find(word) == 0){
+					if(strategy == Strategy.B && find(word) == 0){ //find(word) -> soll nur verdraengen, falls wort nicht schon eingefuegt wurde
+						//keyvalue(old) aus aktueller adresse auslesen
 						StringInteger actual = result.getMap()[address];
 						//(h(k) - s(j,k)) mod m
 						Integer newAddressOfOldKey = Math.floorMod((hashfunktion(actual.getKey()) - sondierungsfunktion(actual.getVersuche() + 1, actual.getKey())), m);
 						
+						//key(old) kann mit EINEM weiteren sondierungsversuch verchoben werden
 						if(result.getMap()[newAddressOfOldKey] == null){
 							//versuche +1
 							actual.setVersuche(actual.getVersuche() + 1);
 							//new key an old key speichern
 							result.getMap()[address] = new StringInteger(word, 1, j);
 							result.getMap()[newAddressOfOldKey] = actual;
-							System.out.println("Ich " + result.getMap()[newAddressOfOldKey].getKey() + " wurde von " + result.getMap()[address].getKey() + " verdrängt ");
+							//System.out.println("Ich " + result.getMap()[newAddressOfOldKey].getKey() + " wurde von " + result.getMap()[address].getKey() + " verdrängt ");
 							inserted++;
 							break;
 						}

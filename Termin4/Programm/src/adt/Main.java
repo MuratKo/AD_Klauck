@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import programm.Programm;
 import exception.TextNotSplittedException;
 
 public class Main {
@@ -44,13 +45,16 @@ public class Main {
 		
 		TextBuilder tbuilder = new TextBuilder("Z:/win7/3_Sem/AD_Klauck/Termin4/Text/", 500);
 		
-		tbuilder.createFile("test500.txt", 500);
-		tbuilder.createFile("test1000.txt", 1000);
-		tbuilder.createFile("test2000.txt", 2000);
-		tbuilder.createFile("test4000.txt", 4000);
-		tbuilder.createFile("test8000.txt", 8000);
-		tbuilder.createFile("test16000.txt", 16000);
-		tbuilder.createFile("test32000.txt", 32000);
+		tbuilder.createFile("test10000.txt", 10000);
+		Programm prog = new Programm("Z:/win7/3_Sem/AD_Klauck/Termin4/Text/test10000.txt", Strategy.B);
+		
+		
+//		tbuilder.createFile("test1000.txt", 1000);
+//		tbuilder.createFile("test2000.txt", 2000);
+//		tbuilder.createFile("test4000.txt", 4000);
+//		tbuilder.createFile("test8000.txt", 8000);
+//		tbuilder.createFile("test16000.txt", 16000);
+//		tbuilder.createFile("test32000.txt", 32000);
 		
 	}
 
